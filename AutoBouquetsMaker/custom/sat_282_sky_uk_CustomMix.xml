@@ -1,0 +1,38 @@
+<custommix>
+
+	<inserts>
+        <insert provider="sat_282_sky_irl" source="401" target="481"></insert> <!-- Sky Sports 1 Ireland -->
+        <insert provider="sat_282_sky_irl" source="402" target="482"></insert> <!-- Sky Sports 2 Ireland -->
+        <insert provider="sat_282_sky_irl" source="403" target="483"></insert> <!-- Sky Sports 3 Ireland -->
+        <insert provider="sat_282_sky_irl" source="404" target="484"></insert> <!-- Sky Sports 4 Ireland -->
+	    <insert provider="sat_282_sky_irl" source="405" target="485"></insert> <!-- Sky Sports 5 Ireland -->
+	</inserts>
+
+	<hacks>
+<![CDATA[
+
+for number in customised["video"].keys():
+	customised["video"][number]["number"] = number
+
+# swap channel numbers. Only swaps number. Channel swap is still done in bouquetwriter.py
+if providerConfig.isSwapChannels() and "swapchannels" in providers[section_identifier] and len(providers[section_identifier]["swapchannels"]) > 0 and "preferred_order" in providers[section_identifier]["swapchannels"][0]:
+	for swaprule in providers[section_identifier]["swapchannels"][0]["preferred_order"]:
+		if swaprule[0] in services[section_identifier]["video"] and swaprule[1] in services[section_identifier]["video"] and services[section_identifier]["video"][swaprule[1]]["service_type"] >= 17:
+			customised["video"][swaprule[0]]["number"] = swaprule[1]
+			customised["video"][swaprule[1]]["number"] = swaprule[0]
+
+for service in sorted(customised["video"].keys()):
+    if service in range(1,1000):
+        if "interactive_name" in customised["video"][service]:
+            customised["video"][service]["interactive_name"] = str(customised["video"][service]["number"]) + "  " + customised["video"][service]["interactive_name"]
+        else:
+            customised["video"][service]["interactive_name"] = str(customised["video"][service]["number"]) + "  " + customised["video"][service]["service_name"]
+			
+for service in sorted(customised["video"].keys()):
+    if service in range(481,486):
+		customised["video"][service]["interactive_name"] = str(customised["video"][service]["number"]) + "  " + customised["video"][service]["service_name"] + " ROI"
+		
+]]>
+
+    </hacks>
+</custommix>
