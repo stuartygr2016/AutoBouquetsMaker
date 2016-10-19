@@ -19,7 +19,7 @@ fi
 #
 before="$(date +%s)"
 
-ABM_urlbase=https://github.com/stuartygr2016/AutoBouquetsMaker/tree/master/AutoBouquetsMaker/providers
+ABM_urlbase=https://github.com/stuartygr2016/AutoBouquetsMaker/raw/master/AutoBouquetsMaker/providers
 todir=/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/Test
 if [ ! -d $todir ]; then
    echo >&2 "Missing $todir"
@@ -28,7 +28,7 @@ fi
 
 # Do the work
 #
-for pv in sat_282_sky_uk cable_ie cable_uk_virgin sat_282_freesat sat_282_sky_irl terrestrial_uk_freeview; do
+for pv in sat_282_sky_uk_CustomMix; do
 
 # busybox wget doesn't need --no-check-certificate, but ignores it anyway...
 #
