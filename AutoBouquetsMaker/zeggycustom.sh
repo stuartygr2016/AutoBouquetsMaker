@@ -20,7 +20,7 @@ fi
 before="$(date +%s)"
 
 ABM_urlbase=https://github.com/stuartygr2016/AutoBouquetsMaker/raw/master/AutoBouquetsMaker/providers
-todir=/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/Test
+todir=/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom
 if [ ! -d $todir ]; then
    echo >&2 "Missing $todir"
    exit 2
@@ -32,16 +32,9 @@ for pv in sat_282_sky_uk_CustomMix; do
 
 # busybox wget doesn't need --no-check-certificate, but ignores it anyway...
 #
-   echo "Fetching ${pv}"
+   echo "Installed ${pv}"
    file=${pv}.xml
-   wget -q --no-check-certificate -O /tmp/upPv.tmp ${ABM_urlbase}/$file
-   if grep -q '<provider>' /tmp/upPv.tmp; then
-      echo -n "$file - Installing..."
-      mv /tmp/upPv.tmp $todir/$file
-      echo "done"
-   else
-      echo >&2 "$file - Not Installed: not a provider file"
-   fi
+   wget -q --no-check-certificate -O /usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/sat_282_sky_uk_CustomMix.xml ${ABM_urlbase}/$file
 done
 
 after="$(date +%s)"
